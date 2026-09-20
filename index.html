@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Prevents most search engines from indexing the personal info on this page -->
+    <meta name="robots" content="noindex, nofollow">
+    <title>Cameron Merrick - Professional ePortfolio</title>
+    <style>
+        /* Base Frutiger Aero & Aurora Styling */
+        :root {
+            --aero-bg-gradient: 
+                radial-gradient(circle at 15% 40%, rgba(168, 230, 207, 0.35), transparent 60%),
+                radial-gradient(circle at 85% 20%, rgba(79, 195, 247, 0.4), transparent 60%),
+                radial-gradient(circle at 50% 80%, rgba(129, 212, 250, 0.3), transparent 60%),
+                linear-gradient(135deg, #e0f7fa 0%, #f1fbff 50%, #b2ebf2 100%);
+            
+            --aero-glass: rgba(255, 255, 255, 0.65);
+            --aero-border-light: rgba(255, 255, 255, 0.95);
+            --aero-border-dark: rgba(255, 255, 255, 0.4);
+            --aero-shadow: 0 10px 30px rgba(0, 50, 100, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            --text-dark: #1f3a4d;
+            --text-muted: #4f6a7a;
+            --aero-blue: #0277bd;
+            
+            --aero-button-top: #81d4fa;
+            --aero-button-mid: #29b6f6;
+            --aero-button-mid-bottom: #0288d1;
+            --aero-button-bottom: #01579b;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            margin: 0; padding: 0;
+            font-family: "Segoe UI", "Trebuchet MS", "Lucida Grande", Arial, sans-serif;
+            background: var(--aero-bg-gradient);
+            background-attachment: fixed;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Anti-Scraper Styles */
+        .reverse {
+            display: inline-block;
+            unicode-bidi: bidi-override;
+            direction: rtl;
+        }
+        .reveal-btn {
+            color: var(--aero-blue);
+            cursor: pointer;
+            text-decoration: underline;
+            font-weight: 500;
+        }
+
+        h1, h2, h3, h4 {
+            font-weight: 600;
+            margin-top: 0;
+            color: #01579b;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+        }
+
+        a { color: var(--aero-blue); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        header {
+            position: fixed; top: 0; width: 100%;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.4));
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            z-index: 1000;
+        }
+
+        nav {
+            max-width: 1000px; margin: 0 auto;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.25rem; font-weight: 700; color: #01579b;
+            text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.9);
+        }
+
+        .nav-links { display: flex; gap: 1rem; }
+
+        .nav-links a {
+            background: linear-gradient(to bottom, var(--aero-button-top) 0%, var(--aero-button-mid) 49%, var(--aero-button-mid-bottom) 50%, var(--aero-button-bottom) 100%);
+            color: white; padding: 0.5rem 1.25rem; border-radius: 20px;
+            font-size: 0.9rem; border: 1px solid rgba(1, 87, 155, 0.6);
+            box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.8), 0 3px 6px rgba(0, 0, 0, 0.15);
+            text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5);
+            transition: all 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            background: linear-gradient(to bottom, #b3e5fc 0%, #4fc3f7 49%, #0277bd 50%, #01579b 100%);
+            box-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.9), 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        main { max-width: 900px; margin: 100px auto 40px auto; padding: 0 2rem; }
+
+        .section-card {
+            background: var(--aero-glass);
+            backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+            border-top: 1px solid var(--aero-border-light);
+            border-left: 1px solid var(--aero-border-light);
+            border-bottom: 1px solid var(--aero-border-dark);
+            border-right: 1px solid var(--aero-border-dark);
+            border-radius: 16px; padding: 2.5rem; margin-bottom: 2.5rem;
+            box-shadow: var(--aero-shadow); position: relative; overflow: hidden;
+            
+            /* Fix: Offset the scroll position to account for the fixed header */
+            scroll-margin-top: 100px;
+        }
+
+        .section-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 40%;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0) 100%);
+            pointer-events: none;
+        }
+
+        .section-title {
+            border-bottom: 1px solid rgba(1, 87, 155, 0.2);
+            padding-bottom: 0.5rem; margin-bottom: 1.5rem;
+            text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.9);
+            position: relative; z-index: 1;
+        }
+
+        .about-grid { display: grid; grid-template-columns: 200px 1fr; gap: 2rem; align-items: start; position: relative; z-index: 1; }
+
+        .aero-img-wrapper {
+            position: relative; border-radius: 12px; overflow: hidden;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.9);
+            background: #fff; margin-bottom: 1.5rem;
+        }
+        
+        .aero-img-wrapper::after {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0) 40%);
+            pointer-events: none;
+        }
+
+        .aero-img-wrapper img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+        .img-row { display: flex; gap: 1.5rem; margin-bottom: 1.5rem; position: relative; z-index: 1; }
+        .img-row .aero-img-wrapper { flex: 1; margin-bottom: 0; height: 250px; }
+
+        .resume-header { text-align: center; margin-bottom: 2rem; position: relative; z-index: 1; }
+        .resume-header h1 { margin-bottom: 0.25rem; color: #01579b; }
+        .resume-header p { margin: 0; color: var(--text-muted); font-size: 0.95rem; }
+        
+        .job-entry { margin-bottom: 1.5rem; position: relative; z-index: 1; }
+        .job-title { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.5rem; }
+        .job-title h3 { margin: 0; font-size: 1.1rem; color: #2c3e50; }
+        .job-title span { font-size: 0.9rem; color: var(--text-muted); font-style: italic; }
+        .resume-list { margin-top: 0.5rem; padding-left: 1.25rem; }
+        
+        .cover-letter p { margin-bottom: 1rem; position: relative; z-index: 1; }
+        .star-heading { font-size: 1.05rem; color: #0277bd; margin-top: 1.5rem; margin-bottom: 0.5rem; position: relative; z-index: 1; }
+        
+        .content-wrapper { position: relative; z-index: 1; }
+
+        footer { text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.85rem; text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.8); }
+
+        @media (max-width: 768px) {
+            .about-grid { grid-template-columns: 1fr; }
+            .aero-img-wrapper { max-width: 250px; margin: 0 auto 1.5rem auto; }
+            .img-row { flex-direction: column; }
+            .img-row .aero-img-wrapper { max-width: 100%; height: auto; aspect-ratio: 16/9; }
+            nav { flex-direction: column; gap: 1rem; }
+            .job-title { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="logo">Cameron Merrick.</div>
+            <div class="nav-links">
+                <a href="#about">About Me</a>
+                <a href="#resume">Resume</a>
+                <a href="#reflection">Reflection</a>
+                <a href="#coverletter">Cover Letter</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+
+        <!-- 1. LANDING PAGE / ABOUT ME -->
+        <section id="about" class="section-card">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-grid">
+                <div class="aero-img-wrapper" style="height: 260px;">
+                    <img src="profile.jpg" alt="Cameron Merrick Professional Headshot">
+                </div>
+                <div class="content-wrapper">
+                    <p>Hi, I'm Cameron. I am a final-year Software Engineering (Honours) student at the University of Technology Sydney (UTS), driven by a deep fascination with how software can seamlessly interface with the physical world.</p>
+                    
+                    <p>My engineering journey began with a natural curiosity for taking things apart to see how they worked. This early interest evolved into a passion for software development, embedded systems, and artificial intelligence. Over the course of my degree, I have honed my skills in everything from low-level C++ programming to full-stack web development and computer vision.</p>
+                    
+                    <p>During my recent 12-week internship at Optik Consultancy, I worked on the Automated Defect Measurement System (ADMS) for Damage Control Project Management (DCPM). This experience was pivotal in shaping my professional identity. It taught me that writing elegant code is only half the job; the other half is understanding the client’s operational constraints, translating complex AI concepts into plain English, and upholding strict engineering ethics.</p>
+
+                    <p>Outside of my professional and academic life, I am an avid tinkerer. I spend my downtime building custom automotive electronics (like my Toyota Corolla digital clock replacement), self-hosting software and home automation systems (such as my C-Bus Alexa integration), and tinkering with 3D printing. These hobbies keep me creative and continuously fuel my passion for learning new technologies.</p>
+
+                    <p>I am now looking to bring my blend of technical problem-solving and proactive communication to a graduate role, specifically targeting industries focused on computer vision and embedded systems.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. CURRICULUM VITAE (RESUME) -->
+        <section id="resume" class="section-card">
+            <h2 class="section-title">Curriculum Vitae</h2>
+            
+            <div class="resume-header">
+                <h1>Cameron Merrick</h1>
+                <!-- Phone is reversed in code to stop scrapers. CSS flips it back for humans. -->
+                <p>Linley Point, NSW | <span class="reverse">876 543 2140</span> | <span class="email-container reveal-btn" id="email-1">[Click to Reveal Email]</span></p>
+                <p>LinkedIn: linkedin.com/in/cameron-merrick | GitHub: github.com/Cxmrykk</p>
+            </div>
+
+            <div class="content-wrapper">
+                <h3>Professional Profile</h3>
+                <p>A dedicated and innovative final-year Software Engineering (Honours) student with a GPA of 5.04. Proven expertise in developing full-stack applications, integrating AI/machine learning models, and building embedded systems. Strong communicator with hands-on consulting experience, looking to leverage technical problem-solving skills in a dynamic graduate engineering role.</p>
+
+                <h3>Education</h3>
+                <div class="job-entry">
+                    <div class="job-title">
+                        <h4>Bachelor of Engineering (Honours) – Software Engineering</h4>
+                        <span>2022 – 2026</span>
+                    </div>
+                    <p style="margin: 0;"><em>University of Technology Sydney (UTS)</em></p>
+                    <ul class="resume-list">
+                        <li><strong>GPA:</strong> 5.04 | <strong>WAM:</strong> 70.32</li>
+                        <li><strong>Key Achievements:</strong> High Distinctions in Programming 1 (95%), Fundamentals of C Programming (92%), Software Analysis Studio (88%), Designing Sustainable Engineering Projects (85%), Secure Programming and Penetration Testing (85%), and Cryptography (85%).</li>
+                    </ul>
+                </div>
+
+                <h3>Professional Experience</h3>
+                <div class="job-entry">
+                    <div class="job-title">
+                        <h4>Software Engineering Intern</h4>
+                        <span>May 2026 – Aug 2026</span>
+                    </div>
+                    <p style="margin: 0;"><em>Optik Consultancy (Client: Damage Control Project Management)</em></p>
+                    <ul class="resume-list">
+                        <li>Collaborated in an agile team of six to deliver the Automated Defect Measurement System (ADMS), a complex software suite for road defect detection using computer vision.</li>
+                        <li>Engineered solutions to extract telemetry (GPS, speed, IMU) from GoPro metadata and performed mathematical projections to generate flat, metric maps.</li>
+                        <li>Communicated highly technical AI limitations and pipeline architectures to non-technical client stakeholders during weekly meetings.</li>
+                        <li>Ensured ethical compliance by documenting and transparently reporting environmental constraints (e.g., wet road reflections) impacting government funding claims.</li>
+                    </ul>
+                </div>
+
+                <div class="job-entry">
+                    <div class="job-title">
+                        <h4>General Duties / Customer Service</h4>
+                        <span>Aug 2022 – Mar 2023</span>
+                    </div>
+                    <p style="margin: 0;"><em>North Ryde RSL</em></p>
+                    <ul class="resume-list">
+                        <li>Worked efficiently in a fast-paced hospitality environment, managing competing priorities across the bar, cafe, and gaming floors.</li>
+                        <li>Developed strong interpersonal communication skills and a strong work ethic.</li>
+                    </ul>
+                </div>
+
+                <div class="job-entry">
+                    <div class="job-title">
+                        <h4>Work Experience Student</h4>
+                        <span>Jun 2019</span>
+                    </div>
+                    <p style="margin: 0;"><em>Schneider Electric, Macquarie Park</em></p>
+                    <ul class="resume-list">
+                        <li>Shadowed engineers working on industrial home automation software (C-Bus lighting, relays, HVAC).</li>
+                        <li>Assisted with on-site building maintenance tracking and system monitoring in the Sydney CBD.</li>
+                    </ul>
+                </div>
+
+                <h3>Key Personal & Academic Projects</h3>
+                <ul class="resume-list">
+                    <li><strong>DCPM-ADMS (Computer Vision Pipeline):</strong> Engineered a Flask and JS-based automated defect measurement system utilising YOLO and SAM2 AI models to georeference and measure road defects.</li>
+                    <li><strong>CirQuS Fridge Monitoring (Full-Stack IoT Dashboard):</strong> Developed a real-time telemetry dashboard using React, Fastify, and TimescaleDB to monitor dilution refrigerators at the Millikelvin lab.</li>
+                    <li><strong>SIS15 (AI Sustainability App):</strong> Created a React Native mobile app integrating PyTorch and OpenAI APIs to classify household waste and provide dynamic recycling instructions.</li>
+                    <li><strong>Corolla-Clock (Embedded Systems & Hardware):</strong> Designed custom C++ firmware, hardware schematics, and 3D-printed housing to replace a vehicle’s digital clock using an ESP32 and AMOLED display.</li>
+                    <li><strong>C-Bus-Helper (Home Automation):</strong> Built a Node.js integration suite and web dashboard to enable Amazon Alexa voice control for Clipsal C-Bus networks.</li>
+                    <li><strong>yt-dlp-tube (Self-Hosted Media Frontend):</strong> Developed a private YouTube frontend in Python/Flask featuring edge-caching, SponsorBlock integration, and dual-audio syncing.</li>
+                </ul>
+
+                <h3>Technical Skills</h3>
+                <ul class="resume-list">
+                    <li><strong>Languages:</strong> C, C++, Python, JavaScript/TypeScript, SQL, HTML/CSS.</li>
+                    <li><strong>Frameworks & Tools:</strong> React, Node.js, Flask, React Native, PlatformIO, OpenCV, PyTorch.</li>
+                    <li><strong>Databases:</strong> PostgreSQL, TimescaleDB, SQLite.</li>
+                    <li><strong>Systems & Infrastructure:</strong> Git, Docker, Linux, WebSockets, REST APIs, Embedded Systems (ESP32, Arduino).</li>
+                    <li><strong>Transferable Skills:</strong> Agile project management, stakeholder communication, technical documentation, problem-solving, ethical engineering practice.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 3. INTERNSHIP REFLECTION -->
+        <section id="reflection" class="section-card">
+            <h2 class="section-title">Internship Reflection</h2>
+            
+            <div class="img-row">
+                <div class="aero-img-wrapper">
+                    <img src="adms-interface.png" alt="Automated Defect Measurement System (ADMS) Interface">
+                </div>
+                <div class="aero-img-wrapper">
+                    <img src="conference-talking.jpg" alt="Conference Presentation">
+                </div>
+            </div>
+
+            <div class="content-wrapper">
+                <h3>What were your expectations about your internship before you joined?</h3>
+                <p>Before joining Optik Consultancy for my 12-week internship, I expected the experience to be heavily isolated and code-centric. Coming from a university environment where assignments often test individual technical capabilities, I anticipated that I would be given a set of requirements, assigned a desk, and asked to write algorithms for eight hours a day.</p>
+
+                <h3>What was the reality? How was it different from your expectations?</h3>
+                <p>The reality was vastly different and far more collaborative. Working on the Automated Defect Measurement System (ADMS) for our client, DCPM, required constant interaction. Rather than just writing code in a silo, I was actively participating in weekly client meetings, explaining our progress, and negotiating feature scopes.</p>
+
+                <h3>What lessons were the most important from your internship? Why were they important?</h3>
+                <p>The most critical lesson I learned was the importance of professional accountability and ethical transparency. During field tests, I discovered that wet road conditions blinded our AI models, skewing the metric calculations by nearly 12%. Because these calculations were used to claim government funding, ignoring this edge case could have led to fraudulent claims.</p>
+
+                <h3>After your workplace experience, what would you say your value proposition would be to an employer? How can you demonstrate this?</h3>
+                <p>My value proposition to an employer is my ability to bridge the gap between advanced technical innovation and practical, client-focused business solutions. I can demonstrate this through my work on ADMS, where I didn't just build a computer vision pipeline; I contextualised it for the client, documented its limitations, and ensured it met strict government compliance standards.</p>
+
+                <h3>How did your internship influence the type of role in which you are interested?</h3>
+                <p>My time at Optik Consultancy solidified my passion for projects where software directly interprets and interacts with the physical world. Moving forward, I am explicitly targeting graduate roles and industries focused on computer vision and embedded systems.</p>
+            </div>
+        </section>
+
+        <!-- 4. COVER LETTER -->
+        <section id="coverletter" class="section-card cover-letter">
+            <h2 class="section-title">Cover Letter</h2>
+            
+            <div class="content-wrapper">
+                <p><strong>Dear Hiring Committee,</strong></p>
+
+                <p>I am writing to express my interest in the Graduate Engineers Program at Industrus Engineering, as advertised. I am particularly drawn to Industrus Engineering because of the Graduate Program's unique rotational structure, which offers the invaluable chance to work across multidisciplinary teams and tackle diverse national projects, from renewable energy storage to disaster recovery.</p>
+
+                <h4 class="star-heading">A commitment to ethical conduct and the highest standards of professional accountability</h4>
+                <p>During my internship at Optik Consultancy, my team developed the Automated Defect Measurement System (ADMS) to assist a client with government disaster funding claims. My task was to ensure the accuracy of the software’s spatial measurements. During validation, I discovered that wet road conditions blinded our computer vision models, skewing the calculations. Rather than hiding this edge case to make the software appear flawless, I proactively documented the environmental limitation in our final report and built a manual review feature into the software.</p>
+
+                <h4 class="star-heading">Demonstrated ability to effectively communicate both with other engineers and with stakeholders from different fields</h4>
+                <p>While developing the ADMS prototype, I needed to articulate the complexities of our computer vision pipeline to both my technical team and our non-technical client representatives. My task was to ensure our engineering team remained aligned on the software architecture while keeping stakeholders informed of our progress. To achieve this, I utilised Agile methodologies to communicate daily technical requirements clearly with my peers.</p>
+
+                <h4 class="star-heading">The ability to engage with a creative, innovative and proactive environment</h4>
+                <p>In the Software Innovation Studio subject, my team was tasked with designing a technological solution to promote environmental sustainability. We needed to create an engaging application that would help users properly dispose of household waste. I proactively proposed and implemented a custom machine learning classification pipeline within a mobile application.</p>
+
+                <h4 class="star-heading">Demonstrated ability to use and manage information</h4>
+                <p>During the Software Development Studio, I contributed to a monitoring dashboard for a university laboratory, which required handling large streams of continuous sensor data. My task was to manage, store, and retrieve high-frequency live data—such as temperature and pressure—coming from the lab's equipment. I integrated a time-series database to efficiently process the incoming information and wrote scripts to optimise the database for long-term scalability.</p>
+
+                <h4 class="star-heading">The ability to manage your own performance in a professional environment</h4>
+                <p>Throughout my final year of study, I balanced a demanding Honours workload with my professional internship at Optik Consultancy. I was responsible for delivering critical components of the ADMS project, including telemetry extraction and mathematical image projections, within a strict 12-week deadline. I managed my deliverables into manageable weekly sprints using task-tracking software.</p>
+
+                <h4 class="star-heading">A demonstrated ability to work as part of a team and to show leadership when required</h4>
+                <p>Towards the final weeks of the ADMS project, our team encountered a critical bottleneck when attempting to share our large AI model files across our version control repository. Taking the initiative, I researched and configured Git Large File Storage (LFS) for our repository. I then scheduled a brief technical workshop to instruct my peers on how to properly download the files and authored comprehensive setup documentation.</p>
+
+                <hr style="border: 0; border-top: 1px solid rgba(1, 87, 155, 0.2); margin: 2rem 0;">
+
+                <p>If you would like me to attend an interview or provide any further information, please contact me at <span class="reveal-btn" id="email-2">[Click to Reveal Email]</span> or call me on <span class="reverse">876 543 2140</span>.</p>
+
+                <p>I look forward to discussing how my skills and experiences align with the goals of Industrus Engineering.</p>
+
+                <p>Regards,</p>
+                <p><strong>Cameron Merrick</strong></p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Cameron Merrick. Designed for University of Technology Sydney (UTS) - Professional Experience Review (41055).</p>
+    </footer>
+
+    <script>
+        // Email Obfuscation Logic
+        // This stops bots because the email never exists as a string in the source.
+        document.addEventListener('DOMContentLoaded', function() {
+            const part1 = "cameronjmerrick";
+            const part2 = "gmail.com";
+            const fullAddress = part1 + "@" + part2;
+
+            const emailElements = [
+                document.getElementById('email-1'),
+                document.getElementById('email-2')
+            ];
+
+            emailElements.forEach(el => {
+                if (el) {
+                    el.addEventListener('click', function() {
+                        // Create a real mailto link
+                        const link = document.createElement('a');
+                        link.href = "mailto:" + fullAddress;
+                        link.textContent = fullAddress;
+                        
+                        // Style it to match the theme
+                        link.style.color = "var(--aero-blue)";
+                        link.style.textDecoration = "underline";
+                        
+                        // Replace the placeholder with the actual link
+                        this.replaceWith(link);
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
